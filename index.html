@@ -62,10 +62,8 @@
   </div>
 
   <script>
-    // Remplace ci-dessous par l'URL de ton Google Sheet (format CSV)
-    //const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1uR0aJU9I7fcgOLqyz_pReUDHBrLzAlMMa-yxTlB7uM8/export?format=csv";
-    const SHEET_CSV_URL = "https://raw.githubusercontent.com/Rachidhared/evenement-live/blob/main/inscrit.csv";
-
+    // 🔗 Lien Google Sheets au format CSV (⚠️ rends ton document "public en lecture seule")
+    const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1uR0aJU9I7fcgOLqyz_pReUDHBrLzAlMMa-yxTlB7uM8/gviz/tq?tqx=out:csv";
 
     async function checkEmail() {
       const emailInput = document.getElementById('email').value.trim().toLowerCase();
@@ -74,6 +72,7 @@
 
       try {
         const response = await fetch(SHEET_CSV_URL);
+        if (!response.ok) throw new Error("Impossible de récupérer la liste.");
         const text = await response.text();
         const emails = text.toLowerCase();
 
@@ -91,5 +90,3 @@
   </script>
 </body>
 </html>
-
-
